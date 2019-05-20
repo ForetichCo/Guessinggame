@@ -1,0 +1,39 @@
+import random
+
+def rules():
+    print("Welcome to Aaron's Guessing Game: The rules - simple. ")
+    print("I'm thinking of a number between 1 and 100.")
+    print("On your first turn, if you guess a number that's within 10 numbers of mine, I'll tell you 'WARM!',")
+    print("or you're futher than 10 numbers away, I'll tell you you're 'COLD!'")
+    print("On your second turn, if your guess is closer than your previous number, I'll tell you 'WARMER!'")
+    print("or I will tell you 'COLDER!' when you're getting further away.\n")
+rules()
+
+thenumber = random.randint(0,100)
+userguesses = [0]
+
+while True:
+
+    userchoice = int(input("I'm thinking of a number between 1 and 100; what is your guess?"))
+    if userchoice < 1 or userchoice > 100 :
+        print('OUT OF BOUNDS! Guess again:')
+        continue
+
+    if userchoice == thenumber:
+        print(f'You guessed it correctly! It only took you {len(userguesses)} try(s)')
+        break
+
+    if userguesses != thenumber:
+        userguesses.append(userchoice)
+
+    if userguesses[-2]:
+        if abs(thenumber - userchoice) < abs(thenumber - userchoice[-2]):
+            print('WARMER!')
+        else:
+            print('COLDER')
+
+    else:
+        if abs(thenumber - userchoice) <=10:
+            print('WARM')
+        else:
+            print('COLD')
